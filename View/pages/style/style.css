@@ -65,6 +65,17 @@ fundo {
   color: gray;
   margin-top: 5px;
 }
+.trash_inactive{
+  color: black;
+
+  font-size: 10px;
+}
+.trash_activated{
+  color: #E60D2E;
+
+  font-size: 10px;
+
+}
 .modal_adicionar_produto .inputs.input_codigo_produto_add {
   width: 58%;
 }
