@@ -15,10 +15,9 @@ $.post("Models/post_receivers/select_valor_caixa.php", data, function (ret) {
   let valor = ret == "" ? (valor = 0) : parseFloat(ret);
   if (!valor >= 30) {
     console.log("a");
-    $('#fazer_sangria').css('animation','hysterical_pulse 0.7s infinite')
+    $("#fazer_sangria").css("animation", "hysterical_pulse 0.7s infinite");
   } else if (valor >= 20) {
-    $('#fazer_sangria').css('animation','pulse 3s infinite')
-
+    $("#fazer_sangria").css("animation", "pulse 3s infinite");
   }
 });
 function valorCaixa() {
@@ -53,7 +52,7 @@ $("#finaliza_sangria_button").click(function () {
 
   $.post("Models/post_receivers/insert_sangria.php", data, function (ret) {
     console.log(ret);
-    location.reload()
+    location.reload();
   });
 });
 $("#valor_sangria").keyup(function () {
@@ -144,15 +143,16 @@ $("#finalizar_venda_modal_button").click(function () {
     $(".modal_troco").css("display", "block");
     $(".modal_pagamento").css("display", "none");
   } else {
-    valor_compra = parseFloat(
+    let valor_compra = parseFloat(
       $("#valor_compra").text().replace("R$", "").replace(",", ".")
     );
-    let produtos = [];
+     let produtos = [];
     $(".venda_preview_body .quantidade_produto").each(function (index) {
       console.log($(this).attr("id_produto") + $(this).text().replace("x", ""));
-      let produto_info = {
+       let produto_info = {
         id: $(this).attr("id_produto"),
         quantidade: $(this).text().replace("x", ""),
+         preco: $(this).attr('preco_produto')
       };
       produtos[index] = produto_info;
     });
@@ -163,14 +163,11 @@ $("#finalizar_venda_modal_button").click(function () {
     };
 
     $.post("Models/post_receivers/insert_venda.php", data, function (ret) {
-      console.log(ret);
-      $(".modal").each(function () {
-        location.reload()
-      });
+      location.reload()
+   
     });
   }
-});
-
+})
 $(document).keyup(function (event) {
   if (event.code.includes("Digit") && condicao_favoravel) {
     var key = event.keyCode || event.which;
@@ -233,7 +230,9 @@ function pesquisarProduto(barcode) {
               $(this).attr("id_produto") +
               '"><td>' +
               $(this).attr("nome_produto") +
-              "</td><td class='quantidade_produto' id_produto='" +
+              "</td><td class='quantidade_produto' preco_produto='" +
+              parseFloat($(this).text().toString().replace(",", ".")) +
+              "' id_produto='" +
               $(this).attr("id_produto") +
               "'>" +
               $(".row_id_" + $(this).attr("id_produto")).length +
