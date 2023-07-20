@@ -24,12 +24,16 @@ body,
 html {
   height: 100%;
 }
+.modal{
+  z-index: 1;
+}
 fundo {
   position: fixed;
-  display: none;
+  display: flex;
   width: 100%;
   top: 0;
   bottom: 0;
+  z-index: 1;
   background: rgba(0, 0, 0, 0.54);
   justify-content: center;
   align-items: center;
@@ -56,6 +60,16 @@ fundo {
   color: #E60D2E;
   padding-left: 5px;
 }
+#colaborador_input{
+  border-radius: 12px;
+border: 1px solid red;
+height: 40px;
+padding: 0 5px;
+color: gray;
+font-size: 18px;
+width: 190px;
+}
+
 .modal_adicionar_produto .inputs input{
   border-radius: 11px;
   border: 1px solid #777;
@@ -429,6 +443,7 @@ font-size: 20px !important;
 }
 .codigo_produto_input {
   width: 70%;
+  position: relative;
 }
 .codigo_produto_input input {
   width: 90%;
@@ -448,6 +463,101 @@ font-size: 20px !important;
 }
 .desc_produto_input {
   width: 100%;
+  position: relative;
+}
+.search_results{
+  width: 600px;
+  display: none;
+overflow-y: scroll;
+  height: 200px;
+  background: white;
+  position: absolute;
+  z-index: 1;
+  max-width: 600px;
+  bottom: -200px;
+  display: none;
+}
+#sidebar{
+  position: absolute;
+  right: 0;
+  height: 70%;
+  background: rgb(255, 255, 255);
+  width: 0;
+  border-radius: 0 0 0 12px;
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-top: 0;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.modal_anotar_pedido{
+  display: flex;
+width: 600px;
+height: 600px;
+position: absolute;
+transform: translate(-50%,-50%);
+background: white;
+top: 50%;
+left: 50%;
+border-radius: 10px;
+justify-content: center;
+}
+.input_nome_cliente input {
+  width: 75%;
+  border: none;
+  border-bottom: 1px solid;
+}
+.modal_anotar_pedido .input_nome_cliente{
+  justify-content: normal;
+  height: 40px;
+  width: 80%;
+}
+#sidebar span{
+  width: 100%;
+text-align: center;
+display: none;
+color: #2e2c2c;
+font-weight: 400;
+cursor: pointer;
+border-bottom: 1px dotted;
+}
+.search_results .resultado_pesquisa {
+  border-bottom: 1px solid black;
+  width: 100%;
+  display: block;
+  margin: 0;
+  padding: 5px;
+  font-size: 15px;
+}
+.search_results_by_barcode {
+  display: none;
+overflow-y: scroll;
+  width: 600px;
+  height: 200px;
+  background: white;
+  position: absolute;
+  z-index: 1;
+  max-width: 600px;
+  
+  bottom: -200px;
+  display: none;
+}
+.search_results_by_barcode .resultado_pesquisa_by_barcode{
+  border-bottom: 1px solid black;
+  width: 100%;
+  display: block;
+  margin: 0;
+  padding: 5px;
+  font-size: 15px;
+}
+.search_results_by_barcode .resultado_pesquisa_by_barcode:hover{
+  cursor: pointer;
+  background: #f0f0f0;
+}
+.search_results .resultado_pesquisa:hover {
+  cursor: pointer;
+  background: #f0f0f0;
 }
 .desc_produto_input input {
   width: 90%;

@@ -1,6 +1,174 @@
 let timeoutId;
 let input_codigo_focado = false;
 let condicao_favoravel = true;
+$('#desc_produto').on('keyup',function(){
+  if($(this).val() == ''){
+    $('.search_results').css("display",'none')
+  }else{
+
+  $('.search_results').css("display",'block')
+  data = {
+    pesquisa: $(this).val(),
+  };
+  $('.search_results').children().remove()
+  $.post("Models/post_receivers/select_pesquisa.php", data, function (ret) {
+    row = JSON.parse(ret);
+    row.forEach(element => {
+     
+      $('.search_results').append('<span produto="'+element.codigo+'" class="resultado_pesquisa">'+element.nome+'</span>')
+      
+    })
+    $('.resultado_pesquisa').click(function(){
+      data = {
+        barcode: $(this).attr("produto"),
+      };
+      
+      $.post("Models/post_receivers/select_produto.php", data, function (ret) {
+      pesquisarProdutoPorCodigoDeBarras(ret)
+      $('.search_results').css("display",'none')
+      $('#desc_produto').val('')
+  });
+  
+});
+  })
+}
+
+})
+$('#codigo_produto').on('keyup',function(){
+  if($(this).val() === ""){
+   console.log('a')
+    $('.search_results_by_barcode').css("display",'none')
+  }else{
+
+  $('.search_results_by_barcode').css("display",'block')
+  data = {
+    pesquisa: $(this).val(),
+    codigo : true
+  };
+  $('.search_results_by_barcode').children().remove()
+  $.post("Models/post_receivers/select_pesquisa.php", data, function (ret) {
+    row = JSON.parse(ret);
+    row.forEach(element => {
+     
+      $('.search_results_by_barcode').append('<span produto="'+element.codigo+'" class="resultado_pesquisa_by_barcode">'+element.nome+'</span>')
+      
+    })
+    $('.resultado_pesquisa_by_barcode').click(function(){
+      data = {
+        barcode: $(this).attr("produto"),
+      };
+      
+      $.post("Models/post_receivers/select_produto.php", data, function (ret) {
+      pesquisarProdutoPorCodigoDeBarras(ret)
+      $('.search_results_by_barcode').css("display",'none')
+      $('#desc_produto').val('')
+  });
+  
+});
+  })
+}
+
+})
+
+function pesquisarProdutoPorCodigoDeBarras(ret){
+    let total_valor = 0;
+          darker ? (darker_class = "darker") : (darker_class = "");
+          row = JSON.parse(ret);
+          console.log(row)
+          if(typeof(row) === 'boolean') return
+          $("#desc_produto").val(row.nome);
+          $("#quantidade_produto").val(1);
+          $("#tabela_produtos tbody").append(
+            "   <tr class='row_id_" +
+              row.id +
+              " " +
+              darker_class +
+              " '><td>" +
+              row.id +
+              "</td><td>" +
+              row.codigo +
+              "</td><td>170.99.00</td><td>" +
+              row.nome +
+              "</td><td id_produto='" +
+              row.id +
+              "' nome_produto='" +
+              row.nome +
+              "' class='preco_produto'>" +
+              row.preco +
+              "</td><td>" +
+              1 +
+              "</td><td>0</td><td>A P</td><td>0,00</td></tr>"
+          );
+          $(".valor_unitario strong").text("R$:" + row.preco);
+          $("#tabela_produtos .preco_produto").each(function () {
+            total_valor =
+              parseFloat(total_valor) +
+              parseFloat($(this).text().replace(",", "."));
+            $(".tiny_row_id" + $(this).attr("id_produto")).remove();
+            $(".venda_preview_body tbody").append(
+              '<tr class="tiny_row_id' +
+                $(this).attr("id_produto") +
+                '"><td>' +
+                $(this).attr("nome_produto") +
+                "</td><td class='quantidade_produto' preco_produto='" +
+                parseFloat($(this).text().toString().replace(",", ".")) +
+                "' id_produto='" +
+                $(this).attr("id_produto") +
+                "'>" +
+                $(".row_id_" + $(this).attr("id_produto")).length +
+                "x</td><td>R$" +
+                $(this).text() +
+                "</td><td>R$" +
+                parseFloat(
+                  (
+                    parseFloat($(this).text().toString().replace(",", ".")) *
+                    parseFloat($(".row_id_" + $(this).attr("id_produto")).length)
+                  ).toFixed(2)
+                ) +
+                '</td><td><i class="fa-regular fa-trash-can trash_inactive remove_item" row="tiny_row_id' +
+                $(this).attr("id_produto") +
+                '" ></i></td></tr>'
+            );
+          });
+          $(".valor_total strong").text(
+            "R$:" + total_valor.toFixed(2).toString().replace(".", ",")
+          );
+          $(".venda_preview_bottom").text(
+            "Subtotal: R$:" + total_valor.toFixed(2).toString().replace(".", ",")
+          );
+          $("#valor_compra").text(
+            "R$" + total_valor.toFixed(2).toString().replace(".", ",")
+          );
+          $(".remove_item").click(function () {
+            if ($(this).attr("class").includes("trash_inactive")) {
+              $(this).addClass("trash_activated");
+              $(this).removeClass("trash_inactive");
+            } else {
+              $(this).removeClass("trash_activated");
+              $(this).addClass("trash_inactive");
+            }
+          });
+    
+          darker = !darker;
+          $('.search_results').css('display','none')
+          $('.search_results_by_barcode').css('display','none')
+
+        }
+  let side_bar_aberta = false
+$('.menu').click(function(){
+  if(side_bar_aberta){
+    $('#sidebar').animate({'width':'0'})
+    $("#sidebar span").css("display",'none')
+
+  }else{
+   
+    $('#sidebar').animate({'width':'300px'},function(){
+      $("#sidebar span").css("display",'block')
+    })
+  }
+  side_bar_aberta = !side_bar_aberta
+
+})
 
 function atualizarHorario() {
   moment.locale("pt-br");
@@ -8,19 +176,19 @@ function atualizarHorario() {
   $(".horario_atual_finder").text(dataAtual);
 }
 
-data = {
+function verificarValorCaixa(){data = {
   caixa: "principal",
 };
 
 $.post("Models/post_receivers/select_valor_caixa.php", data, function (ret) {
   let valor = ret == "" ? (valor = 0) : parseFloat(ret);
-  if (!valor >= 30) {
-    console.log("a");
+  if (valor >= 30) {
     $("#fazer_sangria").css("animation", "hysterical_pulse 0.7s infinite");
   } else if (valor >= 20) {
     $("#fazer_sangria").css("animation", "pulse 3s infinite");
   }
-});
+});}
+verificarValorCaixa()
 function valorCaixa() {
   data = {
     caixa: "principal",
@@ -40,7 +208,8 @@ setInterval(function () {
   atualizarHorario();
 }, 10000);
 
-$("#finaliza_sangria_button").click(function () {
+$(".modal_sangria").submit(function (e) {
+  e.preventDefault()
   data = {
     caixa: "principal",
     valor: $(".valor_caixa_apos_father red")
@@ -49,11 +218,16 @@ $("#finaliza_sangria_button").click(function () {
       .replace(",", "."),
     valor_sangria: $("#valor_sangria").val().replace(",", "."),
     mensagem: $("#motivo_sangria").val(),
+    colaborador:$('#colaborador_input').val()
   };
 
   $.post("Models/post_receivers/insert_sangria.php", data, function (ret) {
-    console.log(ret);
-    location.reload();
+    let vazio = ret
+    if(!vazio){
+      location.reload()
+    }else{
+      alert('Código de usuário inválido')
+    }
   });
 });
 $("#valor_sangria").keyup(function () {
@@ -165,7 +339,7 @@ $("#finalizar_venda_modal_button").click(function () {
     };
 
     $.post("Models/post_receivers/insert_venda.php", data, function (ret) {
-      console.log(ret);
+      location.reload()
     });
   }
 });
@@ -230,83 +404,7 @@ function pesquisarProduto(barcode) {
       };
 
       $.post("Models/post_receivers/select_produto.php", data, function (ret) {
-        let total_valor = 0;
-        darker ? (darker_class = "darker") : (darker_class = "");
-        row = JSON.parse(ret);
-        $("#desc_produto").val(row.nome);
-        $("#quantidade_produto").val(1);
-        $("#tabela_produtos tbody").append(
-          "   <tr class='row_id_" +
-            row.id +
-            " " +
-            darker_class +
-            " '><td>" +
-            row.id +
-            "</td><td>" +
-            row.codigo +
-            "</td><td>170.99.00</td><td>" +
-            row.nome +
-            "</td><td id_produto='" +
-            row.id +
-            "' nome_produto='" +
-            row.nome +
-            "' class='preco_produto'>" +
-            row.preco +
-            "</td><td>" +
-            1 +
-            "</td><td>0</td><td>A P</td><td>0,00</td></tr>"
-        );
-        $(".valor_unitario strong").text("R$:" + row.preco);
-        $("#tabela_produtos .preco_produto").each(function () {
-          total_valor =
-            parseFloat(total_valor) +
-            parseFloat($(this).text().replace(",", "."));
-          $(".tiny_row_id" + $(this).attr("id_produto")).remove();
-          $(".venda_preview_body tbody").append(
-            '<tr class="tiny_row_id' +
-              $(this).attr("id_produto") +
-              '"><td>' +
-              $(this).attr("nome_produto") +
-              "</td><td class='quantidade_produto' preco_produto='" +
-              parseFloat($(this).text().toString().replace(",", ".")) +
-              "' id_produto='" +
-              $(this).attr("id_produto") +
-              "'>" +
-              $(".row_id_" + $(this).attr("id_produto")).length +
-              "x</td><td>R$" +
-              $(this).text() +
-              "</td><td>R$" +
-              parseFloat(
-                (
-                  parseFloat($(this).text().toString().replace(",", ".")) *
-                  parseFloat($(".row_id_" + $(this).attr("id_produto")).length)
-                ).toFixed(2)
-              ) +
-              '</td><td><i class="fa-regular fa-trash-can trash_inactive remove_item" row="tiny_row_id' +
-              $(this).attr("id_produto") +
-              '" ></i></td></tr>'
-          );
-        });
-        $(".valor_total strong").text(
-          "R$:" + total_valor.toFixed(2).toString().replace(".", ",")
-        );
-        $(".venda_preview_bottom").text(
-          "Subtotal: R$:" + total_valor.toFixed(2).toString().replace(".", ",")
-        );
-        $("#valor_compra").text(
-          "R$" + total_valor.toFixed(2).toString().replace(".", ",")
-        );
-        $(".remove_item").click(function () {
-          if ($(this).attr("class").includes("trash_inactive")) {
-            $(this).addClass("trash_activated");
-            $(this).removeClass("trash_inactive");
-          } else {
-            $(this).removeClass("trash_activated");
-            $(this).addClass("trash_inactive");
-          }
-        });
-
-        darker = !darker;
+        pesquisarProdutoPorCodigoDeBarras(ret)
       });
       console.log("Código de barras lido:", barcode);
       $("#codigo_produto").val("");

@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "23a4a975105438af5ec640433c0bbc0c",
     "packages": [
         {
             "name": "mike42/escpos-php",
             "version": "v2.2",
-            "version_normalized": "2.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mike42/escpos-php.git",
@@ -29,9 +34,7 @@
                 "ext-imagick": "Will be used for image printing if present. Required for PDF printing or use of custom fonts.",
                 "guzzlehttp/guzzle": "Allows the use of the ApiConnector to send print jobs over HTTP."
             },
-            "time": "2019-10-05T05:59:00+00:00",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Mike42\\": "src/Mike42"
@@ -60,9 +63,16 @@
                 "issues": "https://github.com/mike42/escpos-php/issues",
                 "source": "https://github.com/mike42/escpos-php/tree/v2.2"
             },
-            "install-path": "../mike42/escpos-php"
+            "time": "2019-10-05T05:59:00+00:00"
         }
     ],
-    "dev": true,
-    "dev-package-names": []
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }
