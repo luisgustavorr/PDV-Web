@@ -211,6 +211,7 @@ setInterval(function () {
 $(".modal_sangria").submit(function (e) {
   e.preventDefault()
   data = {
+    path: "C:\\NewerXampp\\htdocs\\MixSalgados\\Caixa\\",
     caixa: "principal",
     valor: $(".valor_caixa_apos_father red")
       .text()
@@ -222,6 +223,7 @@ $(".modal_sangria").submit(function (e) {
   };
 
   $.post("Models/post_receivers/insert_sangria.php", data, function (ret) {
+    console.log(ret)
     let vazio = ret
     if(!vazio){
       location.reload()
