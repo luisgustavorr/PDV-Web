@@ -1,14 +1,91 @@
 <fundo>
 
 </fundo>
-
+<input type="hidden" id="include_path" value="<?php echo BASE_DIR_PAINEL.'\\'?>" disabled>
 <aside id="sidebar">
   <span onclick="abrirModal('modal_anotar_pedido')">Anotar Pedido</span>
 </aside>
 <form class="modal modal_anotar_pedido">
-  <div class=" input_nome_cliente">
-    <label for="">Nome:</label>
-    <input type="text"  class="oders_input" name="" id="">
+
+  <div class="first_row">
+    <div class="colaborador_father input_father">
+      <div class="subdivision">
+
+      <span>Nome do cliente:</span>
+      <input required type="text" name="nome_cliente" class="oders_inputs" id="nome_cliente_input" placeholder="Insira o nome do cliente">
+      </div>
+      <div class="subdivision">
+
+      <span>Seu código:</span>
+      <input required type="text" name="codigo_colaborador" class="oders_inputs" id="codigo_colaborador_input" placeholder="Insira o seu código">
+      </div>
+
+    </div>
+    <div class="entrega_retirada_father">
+      <div>
+
+      <span>Vai buscar?</span>
+      <label for="sim">Sim</label>
+      <input type="radio" name="entrega_retirada" required value="1" id="sim">
+      <label for="nao">Não</label>
+      <input type="radio" name="entrega_retirada" value="0" id="nao">
+      </div>
+
+      <div class="input_select">
+        <span>Método de Pagamento:</span>
+        <select name="metodo_pagamento" class="pagamento_input" id="metodo_pagamento">
+          <option value="Cartão Crédito">Cartão Crédito</option>
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão Débito">Cartão Débito</option>
+          <option value="Pix">Pix</option>
+
+
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="second_row">
+    <div class="valor_sangria_father input_father">
+      <span>Data do Pedido:</span>
+      <input type="datetime-local" value="<?php echo  date('Y-m-d\TH:i');?>" name="" id="data_pedido">
+
+
+    </div>
+    <div class="valor_caixa_father input_father">
+      <span>Data da Entrega:</span>
+      <input type="datetime-local" name="" value="<?php echo (new DateTime())->modify('+30 minutes')->format('Y-m-d\TH:i') ?>" id="data_entrega">
+
+    </div>
+    <div class="valor_caixa_father input_father">
+      <span>Quantidade:</span>
+      <input type="text" class="oders_inputs" name="" value="1" id="quantidade_produto_pedido">
+
+    </div>
+    <div class="valor_caixa_father input_father">
+      <span>Nome produto:</span>
+      <input type="text" class="tags_produto_name oders_inputs" name="" laceholder="Nome do produto" id="nome_produto_pedido">
+
+    </div>
+
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Qt</th>
+        <th>Produto</th>
+        <th>Valor Unit.</th>
+        <th>Valor Total</th>
+        <th>Remover</th>
+
+      </tr>
+    </thead>
+    <tbody>
+    <tr class="remove_item_pedido"></tr>
+    
+    </tbody>
+  </table>
+  <div class="button_finalizar_father">
+    <button id="finaliza_sangria_button" class="finalizar_button">Finalizar Operação</button>
   </div>
 </form>
 <div id="qr-reader" style="width: 600px"></div>
@@ -276,7 +353,6 @@
   </div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.js"></script>
 <script src="<?php echo INCLUDE_PATH ?>js/index.js"></script>
 
 </body>
