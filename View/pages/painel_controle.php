@@ -14,11 +14,11 @@
         <div class="right_side">
             <div class="input_codigo_user_father">
             <label for="input_codigo_user">Código:</label>
-            <input type="text" name="input_codigo_user" id="input_codigo_user">
+            <input type="text" class="oders_inputs " name="input_codigo_user" id="input_codigo_user">
             </div>
             <div class="input_nome_user_father">
             <label for="input_nome_user">Nome do Funcionário:</label>
-            <input type="text" name="input_nome_user" id="input_nome_user">
+            <input type="text" class="oders_inputs tag_user" name="input_nome_user" id="input_nome_user">
             </div>
         </div>
 
@@ -103,7 +103,7 @@
 
             </div>
         </div>
-        <span class="valores_informados_footer">Valor Total: <red> R$00,00</red></span>
+        <span class="valores_informados_footer">Valor Total: <red> R$00,00</red> </span>
     </div>
     <!-- <div class="valores_apurados_box">
         <span class="valores_apurados_title">Valores Informados:</span>
@@ -147,9 +147,10 @@
 </div>
 <div class="tabela_father">
     <div class="tabela_header">
-    <i class="fa-solid fa-angle-left"></i> <span>Vendas no dia: <yellow>20/07/2023</yellow></span><i class="fa-solid fa-angle-right"></i>
+
+    <i id="voltar_semana" class="fa-solid fa-angle-left modificadores_tempo "></i> <span>Vendas no dia: <yellow> <?php echo date('d/m/Y') ?></yellow> <i onclick='gerarPDFFullFunction(this)' class="gerar_pdf fa-regular fa-file-pdf"></i></span><i id='adiantar_semana' class="fa-solid fa-angle-right modificadores_tempo adiantar_semana"></i>
     </div>
-    <table>
+    <table id="table_tabela">
         <thead>
             <tr>
                 <th>Data Venda</th>
@@ -160,10 +161,12 @@
         </thead>
         <tbody>
                 <?php \Models\PainelControleModel::formarTabela()?>
-            </tr>
+            
         </tbody>
     </table>
 </div>
+
+<script src="<?php echo INCLUDE_PATH?>js/criar_pdf_tabela.js"></script>
 <script src="<?php echo INCLUDE_PATH?>js/index.js"></script>
 
 <script src="<?php echo INCLUDE_PATH?>js/posts_senders.js"></script>

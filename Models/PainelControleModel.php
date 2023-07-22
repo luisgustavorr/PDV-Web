@@ -20,11 +20,12 @@
                 $data_formatada = strftime('%Hh%M-%d/%m/%Y', $timestamp);
                echo "
                <tr>
-               <td>$data_formatada</td>
-                <td>R$".str_replace('.',',',number_format($value['total_valor'], 2))."</td>
-                <td title='".$value['nomes']."'>".$value['nomes']."</td>
-                <td>Dinheiro</td>
-                </tr>";
+               <td> $data_formatada </td>
+                <td> R$".str_replace('.',',',number_format($value['total_valor'], 2))." </td>
+                <td title='".$value['nomes']."'> ".$value['nomes']." </td>
+                <td> Dinheiro </td>
+                
+                </tr>   ";
             }
         }
         public static function buscarDados($request){

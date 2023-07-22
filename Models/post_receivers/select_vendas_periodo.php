@@ -2,9 +2,9 @@
         <?php 
         $prefix = '<div class="tabela_father">
             <div class="tabela_header">
-            <i class="fa-solid fa-angle-left"></i> <span>Vendas no dia: <yellow>20/07/2023</yellow></span><i class="fa-solid fa-angle-right"></i>
+            <i class="fa-solid fa-angle-left"></i> <span>Vendas no dia: <yellow>20/07/2023</yellow> <i class="gerar_pdf fa-regular fa-file-pdf"></i></span><i class="fa-solid fa-angle-right"></i>
             </div>
-            <table>
+            <table id="table_tabela">
                 <thead>
                     <tr>
                     <th>Data Venda</th>

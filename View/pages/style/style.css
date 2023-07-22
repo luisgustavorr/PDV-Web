@@ -29,7 +29,7 @@ html {
 }
 fundo {
   position: fixed;
-  display: flex;
+  display: none;
   width: 100%;
   top: 0;
   bottom: 0;
@@ -1180,6 +1180,7 @@ border-radius: 50%;
   font-size: 12px;
 }
 .selection_switch {
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1246,6 +1247,7 @@ border-bottom: 1px solid gray;
 
 }
 .modal_fechar_caixa {
+  display: none;
   position: absolute;
   width: 800px;
   height: 700px;
@@ -1403,4 +1405,7 @@ border: none;
 }
 .modal_fechar_caixa .body_valores .first_column .input_valores label{
   margin-right: 5px;
+}
+#adiantar_semana{
+  visibility: hidden;
 }
