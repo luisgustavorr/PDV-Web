@@ -1,7 +1,23 @@
 let timeoutId;
 let input_codigo_focado = false;
 let condicao_favoravel = true;
+let caixa = $('#select_caixa').val()
+$('#abrir_lista_pedidos').click(function(){
+  if($('#abrir_lista_pedidos i').attr("class").includes('fa-solid fa-chevron-up')){
+  $("#lista_pedidos").animate({'height':'0'},function(){
+    $("#lista_pedidos").css('display','none')
 
+  })
+
+  $('#abrir_lista_pedidos i').attr("class",'fa-solid fa-chevron-down')
+  }else{
+    $("#lista_pedidos").animate({'height':'200px'})
+  $("#lista_pedidos").css('display','block')
+
+    $('#abrir_lista_pedidos i').attr("class",'fa-solid fa-chevron-up')
+
+  }
+})
 $(".modal_anotar_pedido tbody").children().remove();
 
 $(".tags_produto_name").keyup(function () {
@@ -243,7 +259,7 @@ function atualizarHorario() {
 
 function verificarValorCaixa() {
   data = {
-    caixa: "principal",
+    caixa: caixa,
   };
 
   $.post("Models/post_receivers/select_valor_caixa.php", data, function (ret) {
@@ -258,7 +274,7 @@ function verificarValorCaixa() {
 verificarValorCaixa();
 function valorCaixa() {
   data = {
-    caixa: "principal",
+    caixa: caixa,
   };
 
   $.post("Models/post_receivers/select_valor_caixa.php", data, function (ret) {
@@ -279,7 +295,7 @@ $(".modal_sangria").submit(function (e) {
   e.preventDefault();
   data = {
     path: $('#include_path').val(),
-    caixa: "principal",
+    caixa: caixa,
     valor: $(".valor_caixa_apos_father red")
       .text()
       .replace("R$", "")
@@ -379,37 +395,7 @@ $("#valor_recebido_input").keyup(function () {
     $("#valor_calculado_input").val(valor_calculado);
   }
 });
-$(".modal_anotar_pedido").submit(function (e) {
-  e.preventDefault();
-  produtos = [];
-  data_entrega = $("#data_entrega").val().replace("T", " ");
-  data_pedido = $("#data_pedido").val().replace("T", " ");
-  $(".modal_anotar_pedido tbody")
-    .children()
-    .each(function (index) {
-      let produto = {
-        id: $(this).attr("produto"),
-        quantidade: $(this).attr("quantidade"),
-        preco: $(this).attr("preco_produto"),
-      };
-      produtos[index] = produto;
-    });
-  console.log($("#data_pedido").val());
-  data = {
-    path: $('#include_path').val(),
-    caixa: "principal",
-    pagamento: $('#metodo_pagamento').val(),
-    produtos: produtos,
-    cliente: $("#nome_cliente_input").val(),
-    data_entrega: data_entrega,
-    data_pedido: data_pedido,
-    codigo_colaborador: $("#codigo_colaborador_input").val(),
-    retirada: $('input[name="entrega_retirada"]:checked').val(),
-  };
-  $.post("Models/post_receivers/insert_pedido.php", data, function (ret) {
-    console.log(ret)
-  });
-});
+
 $("#finalizar_venda_modal_button").click(function () {
   //$('#valor_compra').text().replace('R$','') == valor sem R$
   $("#valor_total_input").val($("#valor_compra").text().replace("R$", ""));
@@ -433,7 +419,7 @@ $("#finalizar_venda_modal_button").click(function () {
     });
     data = {
       valor: valor_compra,
-      caixa: "principal",
+      caixa: caixa,
       produtos: produtos,
       pagamento: $("#metodo_pagamento").val(),
     };
@@ -444,7 +430,7 @@ $("#finalizar_venda_modal_button").click(function () {
   }
 });
 $(document).keyup(function (event) {
-  if (event.code.includes("Digit") && condicao_favoravel) {
+  if (event.code.includes("Digit") && condicao_favoravel && window.location.href == 'https://localhost/MixSalgados/Caixa/') {
     var key = event.keyCode || event.which;
     key = String.fromCharCode(key);
     console.log(event.code);

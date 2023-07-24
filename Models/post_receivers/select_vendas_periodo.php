@@ -2,7 +2,7 @@
         <?php 
         $prefix = '<div class="tabela_father">
             <div class="tabela_header">
-            <i class="fa-solid fa-angle-left"></i> <span>Vendas no dia: <yellow>20/07/2023</yellow> <i class="gerar_pdf fa-regular fa-file-pdf"></i></span><i class="fa-solid fa-angle-right"></i>
+            <i id="voltar_semana" class="fa-solid fa-angle-left modificadores_tempo "></i> <span>Vendas no dia: <yellow>20/07/2023</yellow> <i class="gerar_pdf fa-regular fa-file-pdf"></i></span><i id="adiantar_semana" class="fa-solid fa-angle-right modificadores_tempo adiantar_semana"></i>
             </div>
             <table id="table_tabela">
                 <thead>
@@ -15,11 +15,15 @@
                 </thead>
                 <tbody>';
 include('../../MySql.php');
-
+if($_POST['caixa'] != 'todos'){
+    $caixa = "AND `tb_vendas`.`caixa` = '".$_POST['caixa']."'";
+}else{
+    $caixa ="";
+}
 $row = \MySql::conectar()->prepare("SELECT `tb_vendas`.`forma_pagamento`, `tb_vendas`.`data`, SUM(`tb_vendas`.`valor`) as total_valor, GROUP_CONCAT(`tb_produtos`.`nome` SEPARATOR ', ') as nomes 
 FROM `tb_vendas` 
 INNER JOIN `tb_produtos` ON `tb_vendas`.`produto` = `tb_produtos`.`id` 
-WHERE date(`tb_vendas`.`data`) BETWEEN ? AND ?
+WHERE date(`tb_vendas`.`data`) BETWEEN ? AND ? ".$caixa."
 GROUP BY `tb_vendas`.`forma_pagamento`, `tb_vendas`.`data`;");
 $row->execute(array($_POST['data_min'],$_POST['data_max']));
 $row = $row->fetchAll();

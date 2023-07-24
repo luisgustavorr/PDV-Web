@@ -3,9 +3,39 @@
 </fundo>
 <input type="hidden" id="include_path" value="<?php echo BASE_DIR_PAINEL.'\\'?>" disabled>
 <aside id="sidebar">
+  <span>Caixa Selecionado <i class="fa-solid fa-arrow-down"></i></span>
+<select name="select_caixa" id="select_caixa">
+    <?php 
+    $caixas = \MySql::conectar()->prepare("SELECT * FROM `tb_caixas`");
+    $caixas->execute();
+    $caixas = $caixas->fetchAll();
+    foreach ($caixas as $key => $value) {
+      echo '<option value="'.$value['caixa'].'">'.ucfirst($value['caixa']).'</option>';
+    }
+    ?>
+  </select>
   <span onclick="abrirModal('modal_anotar_pedido')">Anotar Pedido</span>
+
+  <span id="abrir_lista_pedidos"><i class="fa-solid fa-chevron-down"></i> Pedidos</span>
+  <div id="lista_pedidos">
+    <?php
+    $pedidos = \MySql::conectar()->prepare("SELECT * FROM `tb_pedidos` WHERE `caixa` = ?");
+    $pedidos->execute(array('principal'));
+    $pedidos = $pedidos->fetchAll();
+    foreach ($pedidos as $key => $value) {
+      $timestamp = strtotime($value['data_pedido']); // Converte a string para um timestamp Unix
+$data_formatada = date('d/m/Y', $timestamp);
+      echo "
+        <span pedido='".json_encode($value)."'>".$value['cliente']."-".$data_formatada."</span>
+      ";
+    }
+    ?>
+  </div>
+
 </aside>
 <form class="modal modal_anotar_pedido">
+    <input type="hidden" id="editando" value="false" disabled>
+    <input type="hidden" id="pedido_id" value="false" disabled>
 
   <div class="first_row">
     <div class="colaborador_father input_father">
@@ -24,7 +54,7 @@
     <div class="endereco_cliente_father">
       <div class="input_endereco_cliente">
       <span>Endereço do cliente:</span>
-      <input required type="text" name="endereco_cliente_input" class="oders_inputs" id="endereco_cliente_input" placeholder="Insira o nome do cliente">
+      <input required type="text" name="endereco_cliente_input" class="oders_inputs" id="endereco_cliente_input" placeholder="Insira o endereço do cliente">
       </div>
       <div class="input_select">
         <span>Método de Pagamento:</span>
@@ -362,6 +392,7 @@
 </div>
 
 <script src="<?php echo INCLUDE_PATH ?>js/index.js"></script>
+<script src="<?php echo INCLUDE_PATH ?>js/posts_senders.js"></script>
 
 </body>
 

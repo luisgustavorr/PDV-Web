@@ -3,6 +3,39 @@
     $( document ).tooltip();
   } );
   </script>
+  <aside id="sidebar">
+  <span id="add_caixa_opener">Adicionar Caixa <i class="fa-solid fa-angle-down"></i></span>
+
+  <form action="" id="adicionar_caixa">
+    <span>Nome</span><br><input id="nome_caixa"placeholder="Digite o nome desse caixa" type="text" required><br>
+    <span>Troco Inicial</span><br><input onKeyUp="mascaraMoeda(this, event)"id="troco_inicial"placeholder="Digite o troco inicial desse caixa" type="text" required><br>
+    <button>Adicionar</button>
+  </form>
+  <span>Caixa(s) Selecionado(s) : <select name="select_caixa" id="select_caixa">
+    <option value="todos">Todos</option>
+    <?php 
+    $caixas = \MySql::conectar()->prepare("SELECT * FROM `tb_caixas`");
+    $caixas->execute();
+    $caixas = $caixas->fetchAll();
+    foreach ($caixas as $key => $value) {
+      echo '<option value="'.$value['caixa'].'">'.ucfirst($value['caixa']).'</option>';
+    }
+    ?>
+  </select></span>
+
+<form id="form_equip">
+
+    <span>Equipamentos do caixa <red>:</red></span>
+    <span>Nome Impressora</span>
+    <input type="text"  id="nome_impressora">
+    <span>Porta serial da balança</span>
+    <input type="text"  id="porta_balanca">
+    <span>Frequencia da balança</span>
+    <input type="text"  id="freq_balanca">
+    <button>Salvar</button>
+</form>
+
+</aside>
   <fundo></fundo>
   <form action="" class="modal modal_fechar_caixa">
     <h3>Fechamento <red>de Caixa:</red></h3>
@@ -143,7 +176,7 @@
 <div class="tabela_father">
     <div class="tabela_header">
 
-    <i id="voltar_semana" class="fa-solid fa-angle-left modificadores_tempo "></i> <span>Vendas no dia: <yellow> <?php echo date('d/m/Y') ?></yellow> <i onclick='gerarPDFFullFunction(this)' class="gerar_pdf fa-regular fa-file-pdf"></i></span><i id='adiantar_semana' class="fa-solid fa-angle-right modificadores_tempo adiantar_semana"></i>
+    <i id="voltar_semana" onclick="mudarTempo(this)" class="fa-solid fa-angle-left modificadores_tempo "></i> <span>Vendas no dia: <yellow> <?php echo date('d/m/Y') ?></yellow> <i onclick='gerarPDFFullFunction(this)' class="gerar_pdf fa-regular fa-file-pdf"></i></span><i onclick="mudarTempo(this)" id='adiantar_semana' class="fa-solid fa-angle-right modificadores_tempo adiantar_semana"></i>
     </div>
     <table id="table_tabela">
         <thead>
