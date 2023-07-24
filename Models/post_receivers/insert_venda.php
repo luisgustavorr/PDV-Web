@@ -1,4 +1,9 @@
-<?php 
+<?php require __DIR__ . '/../../vendor/autoload.php';
+
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+
+use Mike42\Escpos\Printer;
+
 include('../../MySql.php');
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -10,4 +15,13 @@ foreach ($_POST['produtos'] as $key => $value) {
   $atualizar_caixa = \MySql::conectar()->prepare("UPDATE `tb_produtos` SET `estoque` = `estoque`-? WHERE `tb_produtos`.`id` = ?");
   $atualizar_caixa->execute(array($value['quantidade'],$value['id']));
 }
+$connector = new WindowsPrintConnector(dest:"TM-T20X");
+
+$printer = new Printer($connector);
+  $drawerCommand = "\x1B\x70\x00\x19\xFA";
+
+  $connector->write($drawerCommand);
+
+
+$printer->close();
 ?>

@@ -21,16 +21,11 @@
       </div>
 
     </div>
-    <div class="entrega_retirada_father">
-      <div>
-
-      <span>Vai buscar?</span>
-      <label for="sim">Sim</label>
-      <input type="radio" name="entrega_retirada" required value="1" id="sim">
-      <label for="nao">Não</label>
-      <input type="radio" name="entrega_retirada" value="0" id="nao">
+    <div class="endereco_cliente_father">
+      <div class="input_endereco_cliente">
+      <span>Endereço do cliente:</span>
+      <input required type="text" name="endereco_cliente_input" class="oders_inputs" id="endereco_cliente_input" placeholder="Insira o nome do cliente">
       </div>
-
       <div class="input_select">
         <span>Método de Pagamento:</span>
         <select name="metodo_pagamento" class="pagamento_input" id="metodo_pagamento">
@@ -42,6 +37,19 @@
 
         </select>
       </div>
+    </div>
+
+    <div class="entrega_retirada_father">
+      <div>
+
+      <span>Vai buscar?</span>
+      <label for="sim">Sim</label>
+      <input type="radio" name="entrega_retirada" required value="1" id="sim">
+      <label for="nao">Não</label>
+      <input type="radio" name="entrega_retirada" value="0" id="nao">
+      </div>
+
+   
     </div>
   </div>
   <div class="second_row">

@@ -27,20 +27,15 @@
         <span class="valores_informados_title">Valores Informados:</span>
         <div class="body_valores">
             <div class="first_column">
-                <span class="qtd">Qtd</span>
-                <div class="input_valores">
-                    <label for="moedas_informadas">Moedas: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip oders_inputs" name="moedas_informadas" id="moedas_informadas">
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="quantidade quantidade_moedas oders_inputs">
-                </div>
+          
                 <div class="input_valores">
                     <label for="dinheiro_informadas">Dinheiro: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
                     <input  onKeyUp="mascaraMoeda(this, event)"type="text" class="quantidade quantidade_dinheiro oders_inputs">
                 </div>
                 <div class="input_valores">
                     <label for="pix_informadas">Pix: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip oders_inputs"name="pix_informadas" id="pix_informadas">
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="pix_informadas" id="pix_informadas">
                     <input onKeyUp="mascaraMoeda(this, event)"type="text"  class="quantidade quantidade_pix oders_inputs">
                 </div>
             </div>
@@ -48,7 +43,7 @@
                 <span class="qtd">Qtd</span>
                 <div class="input_valores">
                     <label for="moedas_informadas">Cartão: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip oders_inputs" name="moedas_informadas" id="moedas_informadas">
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs" name="moedas_informadas" id="moedas_informadas">
                     <input onKeyUp="mascaraMoeda(this, event)"type="text" class="quantidade quantidade_moedas oders_inputs">
                 </div>
             

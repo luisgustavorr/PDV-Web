@@ -407,7 +407,7 @@ $(".modal_anotar_pedido").submit(function (e) {
     retirada: $('input[name="entrega_retirada"]:checked').val(),
   };
   $.post("Models/post_receivers/insert_pedido.php", data, function (ret) {
-    location.reload()
+    console.log(ret)
   });
 });
 $("#finalizar_venda_modal_button").click(function () {

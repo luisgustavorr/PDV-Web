@@ -60,16 +60,19 @@ fundo {
   color: #E60D2E;
   padding-left: 5px;
 }
-.modal_anotar_pedido .input_select{
+.modal_anotar_pedido .input_select {
   display: flex;
-flex-direction: column;
+  flex-direction: column;
+  width: 36%;
+  margin: 0 2%;
+  margin-right: 2%;
 }
 .modal_anotar_pedido .input_select select {
   border-radius: 4px;
   border: 1px solid #9f9f9f;
   background: #fff;
   width: auto;
-  height: 30px;
+  height: 40px;
   padding: 0 15px;
   font-size: 15px;
   color: gray;
@@ -525,7 +528,7 @@ margin-right: 15px;
 .modal_anotar_pedido{
   display: none;
   width: 700px;
-  height: 630px;
+  height: 720px;
   background: white;
   border-radius: 20px;
   position: absolute;
@@ -980,6 +983,25 @@ color: gray;
 }
 .content_login header .yellow {
   color: #fdc918 !important;
+}
+.input_endereco_cliente {
+  width: 60%;
+}
+#endereco_cliente_input {
+  border-radius: 12px;
+  border: 1px solid red;
+  height: 40px;
+  padding: 0 5px;
+  color: gray;
+  font-size: 18px;
+  width: 100%;
+}
+.endereco_cliente_father{
+  display: flex;
+  flex-direction: row;
+  color: gray;
+  padding: 10px 0;
+  justify-content: space-between;
 }
 .field{
   position: relative;

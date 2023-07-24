@@ -8,7 +8,7 @@ async function gerarPDFFullFunction(esse) {
   }
 
   $("tbody tr td").each(function () {
-    $(this).text(" _ " + $(this).text());
+    $(this).text(" - " + $(this).text());
   });
 
   try {
@@ -18,7 +18,7 @@ async function gerarPDFFullFunction(esse) {
   }
 
   $("tbody tr td").each(function () {
-    $(this).text($(this).text().replace(" _ ", ""));
+    $(this).text($(this).text().replace(" - ", ""));
   });
   $(esse).attr("class",'fa-regular fa-file-pdf')
   geracaoBloqueada = true;
