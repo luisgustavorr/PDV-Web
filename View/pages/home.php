@@ -1,6 +1,12 @@
 <fundo>
 
 </fundo>
+<aside id="notification" >
+<i class="fa-solid fa-xmark"></i>
+  <section class="lista_pedido">
+    
+  </section>
+</aside>
 <input type="hidden" id="include_path" value="<?php echo BASE_DIR_PAINEL.'\\'?>" disabled>
 <aside id="sidebar">
   <span>Caixa Selecionado <i class="fa-solid fa-arrow-down"></i></span>
@@ -17,16 +23,16 @@
   <span onclick="abrirModal('modal_anotar_pedido')">Anotar Pedido</span>
 
   <span id="abrir_lista_pedidos"><i class="fa-solid fa-chevron-down"></i> Pedidos</span>
-  <div id="lista_pedidos">
+  <div class="lista_pedidos">
     <?php
-    $pedidos = \MySql::conectar()->prepare("SELECT * FROM `tb_pedidos` WHERE `caixa` = ?");
+    $pedidos = \MySql::conectar()->prepare("SELECT * FROM `tb_pedidos` WHERE `caixa` = ? AND `entregue` = 0");
     $pedidos->execute(array('principal'));
     $pedidos = $pedidos->fetchAll();
     foreach ($pedidos as $key => $value) {
       $timestamp = strtotime($value['data_pedido']); // Converte a string para um timestamp Unix
 $data_formatada = date('d/m/Y', $timestamp);
       echo "
-        <span pedido='".json_encode($value)."'>".$value['cliente']."-".$data_formatada."</span>
+       <span  pedido='".json_encode($value)."'> <input class='pedido_feito' type='checkbox' pedido='".$value['id']."'><label onclick='editarPedido(this)'> ".$value['cliente']."-".$data_formatada."</label></span>
       ";
     }
     ?>
@@ -127,29 +133,7 @@ $data_formatada = date('d/m/Y', $timestamp);
   </div>
 </form>
 <div id="qr-reader" style="width: 600px"></div>
-<form class="modal modal_adicionar_produto">
-  <div class="first_input_row">
-    <div class="inputs input_codigo_produto_add">
-      <label for="">Código do Produto:</label><br />
-      <input type="text" placeholder="Digite ou leia o Código de barras do Produto" name="codigo_produto_add" id="codigo_produto_add" required>
-    </div>
-    <div class="inputs input_nome_produto_add">
-      <label for="">Nome do Produto:</label><br />
-      <input type="text" placeholder="Digite o nome do Produto" name="nome_produto_add" id="nome_produto_add" required>
-    </div>
-  </div>
-  <div class="second_input_row">
-    <div class="inputs input_preco_produto_add">
-      <label for="">Preço do Produto:</label><br />
-      <input type="text" placeholder="Digite o preço do Produto" name="preco_produto_add" id="preco_produto_add" required>
-    </div>
-    <div class="inputs input_estoque_produto_add">
-      <label for="">Estoque do Produto:</label><br />
-      <input type="text" placeholder="Forneça o estoque do Produto" name="estoque_produto_add" id="estoque_produto_add" required>
-    </div>
-    <button id="finalziar_button_add">Finalizar</button>
-  </div>
-</form>
+
 <div class="modal_troco modal">
 
   <h3>É Necessário Troco?</h3>
@@ -393,6 +377,8 @@ $data_formatada = date('d/m/Y', $timestamp);
 
 <script src="<?php echo INCLUDE_PATH ?>js/index.js"></script>
 <script src="<?php echo INCLUDE_PATH ?>js/posts_senders.js"></script>
+<script src="<?php echo INCLUDE_PATH ?>js/procurar_pedidos_proximos.js"></script>
+
 
 </body>
 

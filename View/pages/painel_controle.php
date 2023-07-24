@@ -3,15 +3,53 @@
     $( document ).tooltip();
   } );
   </script>
+  <form class="modal modal_adicionar_produto">
+  <div class="first_input_row">
+    <div class="inputs input_codigo_produto_add">
+      <label for="">Código do Produto:</label><br />
+      <input type="text" placeholder="Digite ou leia o Código de barras do Produto" name="codigo_produto_add" id="codigo_produto_add" required>
+    </div>
+    <div class="inputs input_nome_produto_add">
+      <label for="">Nome do Produto:</label><br />
+      <input type="text" placeholder="Digite o nome do Produto" name="nome_produto_add" id="nome_produto_add" required>
+    </div>
+  </div>
+  <div class="second_input_row">
+    <div class="inputs input_preco_produto_add">
+      <label for="">Preço do Produto:</label><br />
+      <input type="text" placeholder="Digite o preço do Produto" name="preco_produto_add" id="preco_produto_add" required>
+    </div>
+    <div class="inputs input_estoque_produto_add">
+      <label for="">Estoque do Produto:</label><br />
+      <input type="text" placeholder="Estoque do Produto" name="estoque_produto_add" id="estoque_produto_add" required>
+    </div>
+    <div class="inputs input_por_peso">
+      <label for="">É por peso?</label><br />
+      <div class="inputs_radio_father">
+      <label for="sim">Sim</label>
+      <input type="radio" name="entrega_retirada" required value="1" id="sim">
+      <label for="nao">Não</label>
+      <input type="radio" name="entrega_retirada" value="0" id="nao">
+      </div>
+
+    </div>
+    <button id="finalziar_button_add">Finalizar</button>
+  </div>
+</form>
   <aside id="sidebar">
-  <span id="add_caixa_opener">Adicionar Caixa <i class="fa-solid fa-angle-down"></i></span>
+  <span class="princip_span" onclick="abrirModal('modal_adicionar_funcionario')">Adicionar Funcionário <i class="fa-solid fa-user-plus"></i></span>
+  <span class="princip_span" onclick="abrirModal('modal_adicionar_produto')">Adicionar Produto <i class="fa-solid fa-plus"></i></span>
+
+  <span class="princip_span" id="add_caixa_opener">Adicionar Caixa <i class="fa-solid fa-angle-down"></i></span>
 
   <form action="" id="adicionar_caixa">
-    <span>Nome</span><br><input id="nome_caixa"placeholder="Digite o nome desse caixa" type="text" required><br>
-    <span>Troco Inicial</span><br><input onKeyUp="mascaraMoeda(this, event)"id="troco_inicial"placeholder="Digite o troco inicial desse caixa" type="text" required><br>
+    <span class="princip_span">Nome</span><br><input id="nome_caixa"placeholder="Digite o nome desse caixa" type="text" required><br>
+    <span class="princip_span">Troco Inicial</span><br><input onKeyUp="mascaraMoeda(this, event)"id="troco_inicial"placeholder="Digite o troco inicial desse caixa" type="text" required><br>
     <button>Adicionar</button>
   </form>
-  <span>Caixa(s) Selecionado(s) : <select name="select_caixa" id="select_caixa">
+
+
+  <span class="princip_span" >Caixa(s) Selecionado(s) : <select name="select_caixa" id="select_caixa">
     <option value="todos">Todos</option>
     <?php 
     $caixas = \MySql::conectar()->prepare("SELECT * FROM `tb_caixas`");
@@ -25,16 +63,16 @@
 
 <form id="form_equip">
 
-    <span>Equipamentos do caixa <red>:</red></span>
-    <span>Nome Impressora</span>
+    <span class="princip_span">Equipamentos do caixa <red>:</red></span>
+    <span class="princip_span">Nome Impressora</span>
     <input type="text"  id="nome_impressora">
-    <span>Porta serial da balança</span>
+    <span class="princip_span">Porta serial da balança</span>
     <input type="text"  id="porta_balanca">
-    <span>Frequencia da balança</span>
+    <span class="princip_span">Frequencia da balança</span>
     <input type="text"  id="freq_balanca">
     <button>Salvar</button>
 </form>
-
+<span  id="caixa_remover"><red>Remover Caixa <red></span >
 </aside>
   <fundo></fundo>
   <form action="" class="modal modal_fechar_caixa">

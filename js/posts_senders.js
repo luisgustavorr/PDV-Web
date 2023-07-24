@@ -1,6 +1,18 @@
 $(".datas").change(function () {
   alterarTabela();
 });
+$('.modal_adicionar_produto').submit(function(){
+  
+})
+$(".pedido_feito").change(function(){
+  let pedido = $(this).attr("pedido")
+  data = {
+    pedido:pedido
+  }
+  $.post("Models/post_receivers/update_pedido_feito.php", data, function(ret) {
+    console.log(ret)
+   })
+})
 $('#adicionar_caixa').submit(function(e){
   e.preventDefault()
   data = {
@@ -38,11 +50,32 @@ $('#form_equip').submit(function(e){
 
  })
 })
+let confirmou = false
+$('#caixa_remover').click(function(){
+  if(confirmou){
+      
+  data = {
+    caixa:$('#select_caixa').val()
+ };
+
+ $.post("../Models/post_receivers/delete_caixa.php", data, function(ret) {
+  location.reload()
+
+})
+  }else{
+    $(this).text('Tem certeza?')
+
+  }
+  confirmou = true
+})
 $('#select_caixa').change(function(){
   $('#form_equip').css("display",'block')
+  $('#caixa_remover').css("display",'block')
+
   $('#form_equip red').text($(this).val()+':')
   if($(this).val()=='todos'){
     $('#form_equip').css("display",'none')
+    $('#caixa_remover').css("display",'none')
   }
   data = {
     caixa:$(this).val()
@@ -97,11 +130,13 @@ $(".modal_anotar_pedido").submit(function (e) {
   }
 
 });
-$("#lista_pedidos span").click(function() {
+function editarPedido(esse) {
   // Exibir o fundo e a modal
+  $('.modal_anotar_pedido tbody').empty()
   exibirModalAnotarPedido();
 	$('#editando').val("true")
-  let pedido = JSON.parse($(this).attr('pedido'));
+
+  let pedido = JSON.parse($(esse).attr('pedido'));
   $('#pedido_id').val(pedido.id)
   // Preencher os campos da modal com os dados do pedido
   $('#nome_cliente_input').val(pedido.cliente);
@@ -109,7 +144,9 @@ $("#lista_pedidos span").click(function() {
   $('#metodo_pagamento').val(pedido.forma_pagamento);
   $('#data_pedido').val(pedido.data_pedido);
   $('#data_entrega').val(pedido.data_entrega);
+  console.log(pedido)
 
+  console.log(pedido.produtos)
   let produtos = JSON.parse(pedido.produtos);
   produtos.forEach(produto => {
     const data = {
@@ -134,9 +171,13 @@ $("#lista_pedidos span").click(function() {
       `;
 
       $(".modal_anotar_pedido tbody").append(newRow);
+        $(".remove_item_pedido").click(function () {
+          $(".produto_pedido" + $(this).attr("produto")).remove();
+        });
+      
     });
   });
-});
+}
 
 function exibirModalAnotarPedido() {
   $('fundo').css('display', 'flex');

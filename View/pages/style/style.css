@@ -52,6 +52,7 @@ fundo {
   padding: 2%;
   left: 50%;
   top: 50%;
+  z-index: 2;
   transform: translate(-50%, -50%);
   justify-content: center;
 }
@@ -69,6 +70,9 @@ fundo {
   width: 36%;
   margin: 0 2%;
   margin-right: 2%;
+}
+#sidebar #caixa_remover{
+  display: none;
 }
 .modal_anotar_pedido .input_select select {
   border-radius: 4px;
@@ -90,7 +94,7 @@ font-size: 18px;
 width: 190px;
 }
 
-.modal_adicionar_produto .inputs input{
+.modal_adicionar_produto .inputs input[type="text"]{
   border-radius: 11px;
   border: 1px solid #777;
   background: #FFF;
@@ -98,6 +102,7 @@ width: 190px;
   padding: 5px;
   color: gray;
   margin-top: 5px;
+  width: 90%;
 }
 .trash_inactive{
   color: black;
@@ -109,6 +114,41 @@ width: 190px;
 
   font-size: 10px;
 
+}
+#notification {
+  display: none;
+  width: 400px;
+height: 200px;
+position: absolute;
+bottom: 0%;
+left: 0px;
+background: white;
+z-index: 8;
+}
+#notification i {
+  float: right;
+width: 100%;
+text-align: right;
+color: white;
+background: red;
+border-radius: 0 10px 0 0;
+padding: 2px 5px;
+cursor: pointer;
+}
+#notification section {
+  height: 85%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+#notification span {
+  font-size: 13px;
+border-bottom: 1px dotted;
+padding: 0 10px;
+margin: 10px;
+display: block;
+cursor: pointer;
 }
 .modal_adicionar_produto .inputs.input_codigo_produto_add {
   width: 58%;
@@ -128,12 +168,12 @@ width: 190px;
 }
 .modal_adicionar_produto #finalziar_button_add {
   height: 40px;
-  width: 80px;
   background: rgb(230, 13, 46);
   color: #FDC918;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: 110px;
 }
 .modal_troco {
   display: none;
@@ -706,7 +746,7 @@ border-bottom: 1px dotted;
 #abrir_lista_pedidos i {
   font-size: 12px;
 }
-#lista_pedidos {
+.lista_pedidos {
   background: #e1e1e1;
 width: 100%;
 max-height: 200px;
@@ -1504,11 +1544,11 @@ border: none;
 #adiantar_semana{
   visibility: hidden;
 }
-#lista_pedidos span {
+.lista_pedidos span {
   background: #fa0e0e;
-  color: white;
+  color: white !important;
 }
-#lista_pedidos span:hover {
+.lista_pedidos span:hover {
   background: #ff2b2b;
   color: white;
 }

@@ -4,15 +4,15 @@ let condicao_favoravel = true;
 let caixa = $('#select_caixa').val()
 $('#abrir_lista_pedidos').click(function(){
   if($('#abrir_lista_pedidos i').attr("class").includes('fa-solid fa-chevron-up')){
-  $("#lista_pedidos").animate({'height':'0'},function(){
-    $("#lista_pedidos").css('display','none')
+  $(".lista_pedidos").animate({'height':'0'},function(){
+    $(".lista_pedidos").css('display','none')
 
   })
 
   $('#abrir_lista_pedidos i').attr("class",'fa-solid fa-chevron-down')
   }else{
-    $("#lista_pedidos").animate({'height':'200px'})
-  $("#lista_pedidos").css('display','block')
+    $(".lista_pedidos").animate({'height':'200px'})
+  $(".lista_pedidos").css('display','block')
 
     $('#abrir_lista_pedidos i').attr("class",'fa-solid fa-chevron-up')
 
@@ -245,7 +245,7 @@ $(".menu").click(function () {
     $("#sidebar span").css("display", "none");
   } else {
     $("#sidebar").animate({ width: "300px" },200, function () {
-      $("#sidebar span").css("display", "block");
+      $("#sidebar .princip_span").css("display", "block");
     });
   }
   side_bar_aberta = !side_bar_aberta;
