@@ -1,6 +1,11 @@
 <fundo>
 
 </fundo>
+<?php 
+  if(!isset($_COOKIE['caixa'])){
+    echo '<red>INSIRA UM CAIXA VÁLIDO NO ICONE "<i class="fa-solid fa-bars"></i>"</red>';
+  }
+?>
 <aside id="notification" >
 <i class="fa-solid fa-xmark"></i>
   <section class="lista_pedido">
@@ -9,20 +14,15 @@
 </aside>
 <input type="hidden" id="include_path" value="<?php echo BASE_DIR_PAINEL.'\\'?>" disabled>
 <aside id="sidebar">
-  <span>Caixa Selecionado <i class="fa-solid fa-arrow-down"></i></span>
-<select name="select_caixa" id="select_caixa">
-    <?php 
-    $caixas = \MySql::conectar()->prepare("SELECT * FROM `tb_caixas`");
-    $caixas->execute();
-    $caixas = $caixas->fetchAll();
-    foreach ($caixas as $key => $value) {
-      echo '<option value="'.$value['caixa'].'">'.ucfirst($value['caixa']).'</option>';
-    }
-    ?>
-  </select>
-  <span onclick="abrirModal('modal_anotar_pedido')">Anotar Pedido</span>
+  <span class="princip_span"> Caixa Selecionado</span>
+  <input value="<?php 
+  if(isset($_COOKIE['caixa'])){
+    echo $_COOKIE['caixa'];
+  }
+  ?>" type="text" id="caixa_selecionado" style="height: 30px; text-align:center;"><button id="salvar_caixa">Salvar</button>
+  <span class="princip_span" onclick="abrirModal('modal_anotar_pedido')">Anotar Pedido</span>
 
-  <span id="abrir_lista_pedidos"><i class="fa-solid fa-chevron-down"></i> Pedidos</span>
+  <span class="princip_span"id="abrir_lista_pedidos">Pedidos</span>
   <div class="lista_pedidos">
     <?php
     $pedidos = \MySql::conectar()->prepare("SELECT * FROM `tb_pedidos` WHERE `caixa` = ? AND `entregue` = 0");

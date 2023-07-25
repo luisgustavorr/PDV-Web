@@ -19,11 +19,10 @@ if( \Painel::logado()==false){
     $user = $_POST['login'];
     $senha = $_POST['senha'];
 
-    $logar = \MySql::conectar()->prepare('SELECT * FROM  `tb_adminstradores` WHERE `user` = ?');
+    $logar = \MySql::conectar()->prepare('SELECT * FROM  `tb_colaboradores` WHERE `nome` = ? AND `administrador` = 1');
     $logar->execute(array($user));
     $logar = $logar->fetch();
-    print_r($logar);
-    if(password_verify($senha, $logar['senha'])){
+    if($logar['codigo'] == $senha){
         $_SESSION['login'] = true;
         $_SESSION['user'] = $user;
         $_SESSION['password'] = $senha;

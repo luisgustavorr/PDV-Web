@@ -46,6 +46,22 @@ $(".pedido_feito").change(function(){
     console.log(ret)
    })
 })
+$(".modal_funcionarios").submit(function(e){
+  e.preventDefault()
+  data = {
+    adm:$('input[name="add_funcionario"]:checked').val(),
+    nome:$('#input_add_usuario_nome').val(),
+    codigo:$('#input_add_usuario_codigo').val(),
+  }
+  $.post('../Models/post_receivers/insert_colaborador.php',data,function(ret){
+    	console.log(ret)
+    if(ret != 'ERROR'){
+      location.reload()
+    }else{
+      alert('Código já cadastrado')
+    }
+  })
+})
 $('#adicionar_caixa').submit(function(e){
   e.preventDefault()
   data = {
@@ -122,6 +138,23 @@ $('#select_caixa').change(function(){
   $('#freq_balanca').val(infos.velocidade_balanca)
 
  })
+})
+$(".modal_funcionarios .fa-trash-can").click(function(){
+  data = {
+    id: $(this).attr("pessoa")
+  }
+  $.post('../Models/post_receivers/delete_colaborador.php',data,function(ret){
+    location.reload()
+})
+})
+$('#salvar_caixa').click(function(){
+  data={
+    caixa:$("#caixa_selecionado").val(),
+    no_permission:true
+  }
+  $.post('Models/post_receivers/select_caixa.php',data,function(ret){
+    location.reload()
+  })
 })
 $(".modal_anotar_pedido").submit(function (e) {
   e.preventDefault();

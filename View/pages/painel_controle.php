@@ -39,8 +39,64 @@
     <button id="finalziar_button_add">Finalizar</button>
   </div>
 </form>
+<form class="modal modal_funcionarios">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nome</th>
+                        <th>Administrador</th>
+                        <th>Excluir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php 
+                            $caixas = \MySql::conectar()->prepare("SELECT * FROM `tb_colaboradores`");
+                            $caixas->execute();
+                            $caixas = $caixas->fetchAll();
+                            foreach ($caixas as $key => $value) {
+                                $value['administrador'] == 1 ? $adm ='Sim' : $adm ='Não';
+                                echo '<tr value="' . $value['codigo'] . '">
+                                <td>' . ucfirst($value['codigo']) . '</td>
+
+                                <td>' . ucfirst($value['nome']) . '</td>
+                                <td>' . $adm . '</td>
+
+                                <td><i pessoa="'.$value['id'].'" class="fa-solid fa-trash-can"></i></td>
+
+                                </tr>';
+                            }
+                    ?>
+                </tbody>
+            </table>
+            <div class="inputs_add_usuario">
+                <div class="inputs_father_user">
+                <label for="input_add_usuario_codigo">Código:</label>
+            <input type="text" name="input_add_usuario_codigo" required id="input_add_usuario_codigo" class="oders_inputs">
+                </div>
+ <div class="inputs_father_user">
+ <label for="input_add_usuario_nome">Nome:</label>
+            <input type="text" name="input_add_usuario_nome" required id="input_add_usuario_nome" class="oders_inputs">
+ </div>
+   
+            <div class=" input_por_peso">
+      <label for="">Administrador?</label><br />
+      <div class="inputs_radio_father">
+      <label for="sim">Sim</label>
+      <input class="oders_inputs" type="radio" name="add_funcionario" required value="1" id="sim">
+      <label for="nao">Não</label>
+      <input class="oders_inputs" type="radio" name="add_funcionario" value="0" id="nao">
+      </div>
+
+    </div>
+    <button id="add_usuario">Adicionar</button>
+            </div>
+           
+        </form>
+
+    </div>
   <aside id="sidebar">
-  <span class="princip_span" onclick="abrirModal('modal_adicionar_funcionario')">Adicionar Funcionário <i class="fa-solid fa-user-plus"></i></span>
+  <span class="princip_span" onclick="abrirModal('modal_funcionarios')"> Funcionários <i class="fa-solid fa-user-plus"></i></span>
   <span class="princip_span" id="add_produto_opener" onclick="abrirModal('modal_adicionar_produto')">Adicionar Produto <i class="fa-solid fa-plus"></i></span>
 
   <span class="princip_span" id="add_caixa_opener">Adicionar Caixa <i class="fa-solid fa-angle-down"></i></span>
@@ -142,6 +198,7 @@
         </div>
         <span class="valores_informados_footer">Valor Total: <red> R$00,00</red></span>
     </div>
+    <h4 id="mostrar">Mostrar valores apurados</h4>
     <div class="valores_informados_box">
         <span class="valores_informados_title">Valores Apurados:</span>
         <div class="body_valores">

@@ -47,11 +47,11 @@ function inserirValores(caixa) {
       .replace(".", ","))
   });
 }
-$('#input_codigo_user').keyup(function (){
+$('#mostrar').click(function (){
 inserirValores($("#caixa_ser_fechado").val());
 
 })
-inserirValores($("#caixa_ser_fechado").val());
+
 $('.valores_informados').keyup(function(){
     function converterParaFloat(value_input) {
         var valorFormatado = value_input

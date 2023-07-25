@@ -1177,6 +1177,98 @@ color: gray;
 .pass:hover a{
   text-decoration: underline;
 }
+.modal_fechar_caixa #mostrar{
+  margin: 0 5%;
+font-weight: 400;
+color: red;
+text-decoration: underline;
+}
+.modal_funcionarios {
+  width: 80%;
+transform: translate(-50%,-50%);
+top: 50%;
+left: 50%;
+position: absolute;
+background: white;
+height: 500px;
+border-radius: 12px;
+display: none;
+z-index: 3;
+padding-bottom: 5%;
+flex-direction: column;
+justify-content: space-between;
+}
+.inputs_father_user{
+  display: flex;
+  flex-direction: column;
+}
+#add_usuario {
+  background: red;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.inputs_father_user input[type="text"] {
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid gray;
+}
+.inputs_add_usuario {
+  display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+color: #393939;
+}
+
+.modal_funcionarios table thead{
+  background: red;
+border-radius: 12px 12px 0 0;
+color: white;
+height: 30px;
+display: flex;
+}
+.modal_funcionarios table{
+  display: flex;
+flex-direction: column;
+max-height: 450px;
+overflow-y: scroll;
+}
+.modal_funcionarios table thead tr{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+.modal_funcionarios table thead tr th{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+.modal_funcionarios table tbody tr td{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+}
+.modal_funcionarios table tbody tr i{
+  cursor: pointer;
+}
+.modal_funcionarios table tbody tr {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 7px;
+border-bottom: 1px solid;
+}
+#salvar_caixa{
+  height: 25px;
+  background: red;
+  color: white;
+  border: none;
+  margin-bottom: 5px;
+}
 .field input[type="submit"]{
   background: #fdc918;
   color: white;
