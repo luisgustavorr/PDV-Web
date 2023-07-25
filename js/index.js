@@ -418,6 +418,7 @@ $("#finalizar_venda_modal_button").click(function () {
       produtos[index] = produto_info;
     });
     data = {
+      colaborador:$('#codigo_colaborador_venda').val(),
       valor: valor_compra,
       caixa: caixa,
       produtos: produtos,
@@ -425,7 +426,7 @@ $("#finalizar_venda_modal_button").click(function () {
     };
 
     $.post("Models/post_receivers/insert_venda.php", data, function (ret) {
-      location.reload();
+      console.log(ret)
     });
   }
 });

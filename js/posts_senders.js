@@ -1,6 +1,39 @@
 $(".datas").change(function () {
   alterarTabela();
 });
+$('#add_produto_opener').click(function(){
+  data ={
+  
+  }
+  $.post('../Models/post_receivers/gerar_codigos.php',data,function(ret){
+    console.log(ret)
+    let res = JSON.parse(ret)
+    $("#codigo_barras_produto_add").val(res.codigo)
+    $("#codigo_produto_add").val(res.codigo_id)
+
+  })
+})
+$(".modal_adicionar_produto").submit(function(e){
+  e.preventDefault()
+  data ={
+    nome:$('#nome_produto_add').val(),
+    codigo:$('#codigo_barras_produto_add').val(),
+    codigo_id:$('#codigo_produto_add').val(),
+    preco:$("#preco_produto_add").val(),
+    por_peso:$('input[name="produto_por_peso"]:checked').val()
+  }
+  $.post('../Models/post_receivers/insert_produto.php',data,function(ret){
+    if(ret.includes('Codigo_repetido')){
+      alert("Codigo do produto já existente")
+    }else if(ret.includes('Codigo_barras_repetido')){
+      alert("Codigo de barras do produto já existente")
+
+    }else{
+      location.reload()
+    }
+  })
+})
+
 $('.modal_adicionar_produto').submit(function(){
   
 })

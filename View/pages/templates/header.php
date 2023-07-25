@@ -36,6 +36,7 @@
 
   </head>
   <body>
+     <script>0</script>
   <header>
       <img src="<?php echo INCLUDE_PATH?>img/Logo mix.png" style="height: 40px;
 object-fit: contain;" />

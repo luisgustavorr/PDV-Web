@@ -5,31 +5,34 @@
   </script>
   <form class="modal modal_adicionar_produto">
   <div class="first_input_row">
+  <div class="inputs input_nome_produto_add">
+      <label for="">Nome do produto:</label><br />
+      <input class="oders_inputs"  type="text" placeholder="Digite o nome do Produto" name="nome_produto_add" id="nome_produto_add" required>
+    </div>
     <div class="inputs input_codigo_produto_add">
-      <label for="">Código do Produto:</label><br />
-      <input type="text" placeholder="Digite ou leia o Código de barras do Produto" name="codigo_produto_add" id="codigo_produto_add" required>
+      <label for="">Código de barras do produto:</label><br />
+      <input maxlength="13" class="oders_inputs" type="text" placeholder="Digite ou leia o Código de barras do Produto" name="codigo_barras_produto_add" id="codigo_barras_produto_add" required>
     </div>
-    <div class="inputs input_nome_produto_add">
-      <label for="">Nome do Produto:</label><br />
-      <input type="text" placeholder="Digite o nome do Produto" name="nome_produto_add" id="nome_produto_add" required>
-    </div>
+
+
   </div>
   <div class="second_input_row">
+  <div class="inputs input_codigo_produto_add">
+      <label for="">Código do produto:</label><br />
+      <input class="oders_inputs" type="text" placeholder="Digite o Código de barras do Produto" name="codigo_produto_add" id="codigo_produto_add" required>
+    </div>
     <div class="inputs input_preco_produto_add">
-      <label for="">Preço do Produto:</label><br />
-      <input type="text" placeholder="Digite o preço do Produto" name="preco_produto_add" id="preco_produto_add" required>
+      <label for="">Valor por UN ou g:</label><br />
+      <input class="oders_inputs" type="text" placeholder="Digite o preço do Produto" name="preco_produto_add" id="preco_produto_add" required>
     </div>
-    <div class="inputs input_estoque_produto_add">
-      <label for="">Estoque do Produto:</label><br />
-      <input type="text" placeholder="Estoque do Produto" name="estoque_produto_add" id="estoque_produto_add" required>
-    </div>
+
     <div class="inputs input_por_peso">
-      <label for="">É por peso?</label><br />
+      <label for="">É por grama?</label><br />
       <div class="inputs_radio_father">
       <label for="sim">Sim</label>
-      <input type="radio" name="entrega_retirada" required value="1" id="sim">
+      <input class="oders_inputs" type="radio" name="produto_por_peso" required value="1" id="sim">
       <label for="nao">Não</label>
-      <input type="radio" name="entrega_retirada" value="0" id="nao">
+      <input class="oders_inputs" type="radio" name="produto_por_peso" value="0" id="nao">
       </div>
 
     </div>
@@ -38,7 +41,7 @@
 </form>
   <aside id="sidebar">
   <span class="princip_span" onclick="abrirModal('modal_adicionar_funcionario')">Adicionar Funcionário <i class="fa-solid fa-user-plus"></i></span>
-  <span class="princip_span" onclick="abrirModal('modal_adicionar_produto')">Adicionar Produto <i class="fa-solid fa-plus"></i></span>
+  <span class="princip_span" id="add_produto_opener" onclick="abrirModal('modal_adicionar_produto')">Adicionar Produto <i class="fa-solid fa-plus"></i></span>
 
   <span class="princip_span" id="add_caixa_opener">Adicionar Caixa <i class="fa-solid fa-angle-down"></i></span>
 
@@ -76,7 +79,16 @@
 </aside>
   <fundo></fundo>
   <form action="" class="modal modal_fechar_caixa">
-    <h3>Fechamento <red>de Caixa:</red></h3>
+    <h3><i id="print_fechamento" class="fa-solid fa-print"></i> Fechamento do caixa: <red><select id="caixa_ser_fechado">
+    <?php 
+    $caixas = \MySql::conectar()->prepare("SELECT * FROM `tb_caixas` WHERE valor_atual > 0 AND valor_atual != troco_inicial");
+    $caixas->execute();
+    $caixas = $caixas->fetchAll();
+    foreach ($caixas as $key => $value) {
+      echo '<option value="'.$value['caixa'].'">'.ucfirst($value['caixa']).'</option>';
+    }
+    ?>
+    </select></red></h3>
     <div class="first_row">
         <div class="left_side">
             Data do Fechamento:
@@ -101,21 +113,17 @@
           
                 <div class="input_valores">
                     <label for="dinheiro_informadas">Dinheiro: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
-                    <input  onKeyUp="mascaraMoeda(this, event)"type="text" class="quantidade quantidade_dinheiro oders_inputs">
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="valores_informados input_princip_completo oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
                 </div>
                 <div class="input_valores">
                     <label for="pix_informadas">Pix: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="pix_informadas" id="pix_informadas">
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text"  class="quantidade quantidade_pix oders_inputs">
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="valores_informados input_princip_completo oders_inputs"name="pix_informadas" id="pix_informadas">
                 </div>
             </div>
             <div class="first_column">
-                <span class="qtd">Qtd</span>
                 <div class="input_valores">
                     <label for="moedas_informadas">Cartão: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs" name="moedas_informadas" id="moedas_informadas">
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="quantidade quantidade_moedas oders_inputs">
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="valores_informados input_princip_completo oders_inputs" name="moedas_informadas" id="moedas_informadas">
                 </div>
             
                 <!-- <div class="input_valores">
@@ -125,7 +133,7 @@
                 </div> -->
                 <div class="input_valores">
                     <label for="dinheiro_informadas">Pgto/Sangria: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="valores_informados input_princip_completo oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
                 </div>
             </div>
             <div class="second_column">
@@ -135,41 +143,41 @@
         <span class="valores_informados_footer">Valor Total: <red> R$00,00</red></span>
     </div>
     <div class="valores_informados_box">
-        <span class="valores_informados_title">Valores Informados:</span>
+        <span class="valores_informados_title">Valores Apurados:</span>
         <div class="body_valores">
             <div class="first_column">
                 <div class="input_valores">
-                    <label for="moedas_informadas">Troco Inicial: </label>
-                    <input  onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs" name="moedas_informadas" id="moedas_informadas">
+                    <label for="troco_inicial_fechar">Troco Inicial: </label>
+                    <input  onKeyUp="mascaraMoeda(this, event)"type="text" class=" input_princip_completo oders_inputs" name="troco_inicial_fechar" id="troco_inicial_fechar">
                 </div>
                 <div class="input_valores">
-                    <label for="dinheiro_informadas">Troco de Vendas: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
+                    <label for="total_vendas">Total de Vendas: </label>
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class=" input_princip_completo oders_inputs"name="total_vendas" id="total_vendas">
                 </div>
                 <div class="input_valores">
-                    <label for="pix_informadas">Troco Final: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="pix_informadas" id="pix_informadas">
+                    <label for="troco_final">Troco Final: </label>
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class=" input_princip_completo oders_inputs"name="troco_final" id="troco_final">
                 </div>
             </div>
             <div class="first_column">
                 <div class="input_valores">
-                    <label for="moedas_informadas">Troco Apurado: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs" name="moedas_informadas" id="moedas_informadas">
+                    <label for="total_apurado">Total Apurado: </label>
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs" name="total_apurado" id="total_apurado">
                 </div>
                 <div class="input_valores">
-                    <label for="dinheiro_informadas">Troco Informado: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="dinheiro_informadas" id="dinheiro_informadas">
+                    <label for="total_informado">Total Informado: </label>
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="total_informado" id="total_informado">
                 </div>
                 <div class="input_valores">
-                    <label for="pix_informadas">Diferença: </label>
-                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="pix_informadas" id="pix_informadas">
+                    <label for="diferenca">Diferença: </label>
+                    <input onKeyUp="mascaraMoeda(this, event)"type="text" class="input_princip_completo oders_inputs"name="diferenca" id="diferenca">
                 </div>
             </div>
             <div class="second_column">
 
             </div>
         </div>
-        <span class="valores_informados_footer">Valor Total: <red> R$00,00</red> </span>
+        <span class="valores_apurados_footer">Valor Total: <red> R$00,00</red> </span>
     </div>
     <!-- <div class="valores_apurados_box">
         <span class="valores_apurados_title">Valores Informados:</span>
@@ -234,5 +242,6 @@
 
 <script src="<?php echo INCLUDE_PATH?>js/criar_pdf_tabela.js"></script>
 <script src="<?php echo INCLUDE_PATH?>js/index.js"></script>
+<script src="<?php echo INCLUDE_PATH?>js/fechar_caixa.js"></script>
 
 <script src="<?php echo INCLUDE_PATH?>js/posts_senders.js"></script>

@@ -93,7 +93,13 @@ color: gray;
 font-size: 18px;
 width: 190px;
 }
-
+#caixa_ser_fechado{
+  background: white;
+  font-size: 20px;
+  border: none;
+  color: red;
+  font-weight: 500;
+}
 .modal_adicionar_produto .inputs input[type="text"]{
   border-radius: 11px;
   border: 1px solid #777;
@@ -201,7 +207,7 @@ cursor: pointer;
 }
 .modal_pagamento {
   display: none;
-  width: 570px;
+  width: 700px;
   height: 480px;
   background: white;
   border-radius: 20px;
@@ -1476,6 +1482,23 @@ border-radius: 12px;
   margin-left: 5px;
 }
 .modal_fechar_caixa .valores_informados_box .valores_informados_footer{
+  height: 15%;
+  position: relative;
+  display: flex;
+  bottom: -8%;
+  background: rgb(253, 201, 24);
+  color: white;
+  padding: 0 15px;
+  justify-content: center;
+  align-items: center;
+  left: 60%;
+  border-radius: 7px;
+  width: 200px;
+}
+.modal_fechar_caixa .valores_informados_box .valores_apurados_footer red{
+  margin-left: 5px;
+}
+.modal_fechar_caixa .valores_informados_box .valores_apurados_footer{
   height: 15%;
   position: relative;
   display: flex;

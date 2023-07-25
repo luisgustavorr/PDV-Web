@@ -205,6 +205,12 @@ $data_formatada = date('d/m/Y', $timestamp);
   <div class="head_pagamento">
 
     <div class="inputs_pagamento_father">
+      <span>Seu Código:</span>
+      <input type="text" class="oders_inputs" placeholder="Digite o seu do código" name="codigo_colaborador_venda" id="codigo_colaborador_venda">
+
+    </div>
+
+    <div class="inputs_pagamento_father">
       <span>Nome Cliente:</span>
       <input type="text" class="oders_inputs" placeholder="Digite o Nome do Cliente" name="nome_cliente" id="nome_cliente">
 

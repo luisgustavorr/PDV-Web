@@ -1,6 +1,6 @@
 <?php 
 require __DIR__ . '/../../vendor/autoload.php';
-
+print_r($_POST);
 use Mike42\Escpos\Printer;
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
 
@@ -15,57 +15,23 @@ $printer->setEmphasis(true); // Ativa o modo de enfatizar (negrito)
 $printer->text("FECHAMENTO DE CAIXA\n");
 $printer->setEmphasis(false); // Desativa o modo de enfatizar (negrito)
 $printer->text("Data: " . date("d/m/Y H:i:s") . "\n"); // Adicione a data e hora do fechamento
-$funcionario = 'Luís Gustavo R. Rezende';
+$funcionario = $_POST['funcionario'];
 $printer->text("Funcionário: " . $funcionario  . "\n"); // Adicione a data e hora do fechamento
-
-// Valores apurados pelo sistema
-$valorDinheiroSistema = 1000.00;
-$valorCartaoSistema = 800.00;
-$valorPixSistema = 500.00;
-
-// Valores informados pelo funcionário
-$valorDinheiroFuncionario = 980.00;
-$valorCartaoFuncionario = 820.00;
-$valorPixFuncionario = 510.00;
 
 // Escreve os valores informados pelo funcionário
 $printer->setEmphasis(true); // Ativa o modo de enfatizar (negrito)
-$printer->text("Valores Informados\n");
-$printer->setEmphasis(false); // Desativa o modo de enfatizar (negrito)
-$printer->text("Dinheiro: R$" . number_format($valorDinheiroFuncionario, 2, ',', '.') . "\n");
-$printer->text("Cartão: R$" . number_format($valorCartaoFuncionario, 2, ',', '.') . "\n");
-$printer->text("Pix: R$" . number_format($valorPixFuncionario, 2, ',', '.') . "\n");
-
-
-// Escreve os valores apurados pelo sistema
-$printer->setEmphasis(true); // Ativa o modo de enfatizar (negrito)
 $printer->text("Valores Apurados\n");
 $printer->setEmphasis(false); // Desativa o modo de enfatizar (negrito)
-$printer->text("Dinheiro: R$" . number_format($valorDinheiroSistema, 2, ',', '.') . "\n");
-$printer->text("Cartão: R$" . number_format($valorCartaoSistema, 2, ',', '.') . "\n");
-$printer->text("Pix: R$" . number_format($valorPixSistema, 2, ',', '.') . "\n");
+$printer->text("Troco Inicial ".$_POST['troco_inicial']."\n");
+$printer->text("Total Vendas ".$_POST['total_vendas']."\n");
+$printer->text("Troco Final ".$_POST['troco_final']."\n");
+$printer->text("Total Apurado ".$_POST['total_apurado']."\n");
+$printer->text("Total Informado ".$_POST['total_informado']."\n");
+if($_POST['diferenca'] < 0 ){
+$printer->setEmphasis(true); // Desativa o modo de enfatizar (negrito)
 
-
-// Calcula as diferenças entre os valores apurados e os informados
-$diferencaDinheiro = $valorDinheiroFuncionario - $valorDinheiroSistema ;
-$diferencaCartao =  $valorCartaoFuncionario - $valorCartaoSistema;
-$diferencaPix =  $valorPixFuncionario - $valorPixSistema ;
-
-// Escreve as diferenças
-$printer->setEmphasis(true); // Ativa o modo de enfatizar (negrito)
-$printer->text("Diferenças\n");
-$printer->setEmphasis(false); // Desativa o modo de enfatizar (negrito)
-if($diferencaDinheiro < 0)$printer->setEmphasis(true); // Ativa o modo de enfatizar (negrito)
-$printer->text("Dinheiro: R$" . number_format($diferencaDinheiro, 2, ',', '.') . "\n");
-if($diferencaDinheiro < 0)$printer->setEmphasis(false); // Ativa o modo de enfatizar (negrito)
-
-if($diferencaCartao < 0)$printer->setEmphasis(true); // Ativa o modo de enfatizar (negrito)
-$printer->text("Cartão: R$" . number_format($diferencaCartao, 2, ',', '.') . "\n");
-if($diferencaCartao < 0)$printer->setEmphasis(false); // Ativa o modo de enfatizar (negrito)
-
-if($diferencaPix < 0)$printer->setEmphasis(true); // Ativa o modo de enfatizar (negrito)
-$printer->text("Pix: R$" . number_format($diferencaPix, 2, ',', '.') . "\n");
-if($diferencaPix < 0)$printer->setEmphasis(false); // Ativa o modo de enfatizar (negrito)
+}
+$printer->text("Diferença ".$_POST['diferenca']."\n");
 
 // Escreve o campo de assinatura
 $printer->text("\nAssinatura _______________________\n");
