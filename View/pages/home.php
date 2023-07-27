@@ -6,7 +6,7 @@
     echo '<red>INSIRA UM CAIXA VÁLIDO NO ICONE "<i class="fa-solid fa-bars"></i>"</red>';
   }
 ?>
-
+ 
 <aside id="notification" >
 <i class="fa-solid fa-xmark"></i>
   <section class="lista_pedido">
