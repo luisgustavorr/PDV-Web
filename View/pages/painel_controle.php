@@ -262,6 +262,8 @@
            <red class="quant_vendas"><?php \Models\PainelControleModel::buscarDados('quantidadeVendas')?> Vendas</red>
            <span>Produto Mais vendido no período::</span>
            <red class="top_produto"><?php \Models\PainelControleModel::buscarDados('produtoMaisVendido')?></red>
+           <span>Total valor de vendas período::</span>
+           <red class="valor_total">R$<?php \Models\PainelControleModel::buscarDados('totalValor')?></red>
         </div>
         <div class="left_subdivision">
             <h3>Realizar Fechamento do caixa</h3>

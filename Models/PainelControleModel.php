@@ -38,7 +38,7 @@
              
             (SELECT COUNT(*)
              FROM `tb_vendas`) AS quantidadeVendas,
-             
+             (SELECT SUM(`tb_vendas`.`valor`) FROM `tb_vendas`) AS totalValor,
             (SELECT `tb_produtos`.`nome`
              FROM `tb_produtos`
              INNER JOIN `tb_vendas` ON `tb_vendas`.`produto` = `tb_produtos`.`id`

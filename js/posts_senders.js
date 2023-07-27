@@ -289,6 +289,8 @@ function alterarTabela() {
     $(".pagamento_recorrente").text(row.formaPagamentoMaisRepetida);
     $(".quant_vendas").text(row.quantidadeVendas);
     $(".top_produto").text(row.produtoMaisVendido);
+    $(".valor_total").text(row.valorTotal);
+
   });
   if ($("dot").attr("style").includes("left")) {
     data = {

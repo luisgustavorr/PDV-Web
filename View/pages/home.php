@@ -6,6 +6,7 @@
     echo '<red>INSIRA UM CAIXA VÁLIDO NO ICONE "<i class="fa-solid fa-bars"></i>"</red>';
   }
 ?>
+
 <aside id="notification" >
 <i class="fa-solid fa-xmark"></i>
   <section class="lista_pedido">
@@ -220,6 +221,7 @@ $data_formatada = date('d/m/Y', $timestamp);
       <input type="text" class="oders_inputs" placeholder="Digite o Whatsapp do Cliente" name="whatsapp_cliente" id="whatsapp_cliente">
     </div>
   </div>
+  
   <div class="body_part_pagamento">
     <div class="left_side_pagamento">
       <h3>Pagamento:</h3>
@@ -387,5 +389,19 @@ $data_formatada = date('d/m/Y', $timestamp);
 
 
 </body>
+<div style="text-align:center">
+    <h1>Print ESP/POS commands from Javascript</h1>
+    <hr />
+    <label class="checkbox">
+        <input type="checkbox" id="useDefaultPrinter" /> <strong>Print to Default printer</strong>
+    </label>
+    <p>or...</p>
+    <div id="installedPrinters">
+        <label for="installedPrinterName">Select an installed Printer:</label>
+        <select name="installedPrinterName" id="installedPrinterName"></select>
+    </div>
+    <br /><br />
+    <button type="button" onclick="print();">Print Now...</button>
+</div>
 
 </html>

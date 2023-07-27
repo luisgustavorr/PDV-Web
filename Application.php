@@ -11,7 +11,6 @@ class Application
         $viewName = strtolower($url);
         $controllerFile = 'Controllers/' . $url . 'Controller.php';
         $viewFile = 'View/pages/' . $viewName . '.php';
-
         // Verifica se o arquivo do controlador e a view existem
         if (file_exists(str_replace('DashBoard/','',$controllerFile)) ) {
             include_once( str_replace('DashBoard/','',$controllerFile));

@@ -1,7 +1,7 @@
 let timeoutId;
 let input_codigo_focado = false;
 let condicao_favoravel = true;
-let caixa = $('#select_caixa').val()
+let caixa = $('#caixa_selecionado').val()
 $('#abrir_lista_pedidos').click(function(){
   if($('#abrir_lista_pedidos i').attr("class").includes('fa-solid fa-chevron-up')){
   $(".lista_pedidos").animate({'height':'0'},function(){
