@@ -2,7 +2,7 @@
         <?php 
         $prefix = '<div class="tabela_father">
             <div class="tabela_header">
-            <i id="voltar_semana" class="fa-solid fa-angle-left modificadores_tempo "></i> <span>Vendas no dia: <yellow>20/07/2023</yellow> <i class="gerar_pdf fa-regular fa-file-pdf"></i></span><i id="adiantar_semana" class="fa-solid fa-angle-right modificadores_tempo adiantar_semana"></i>
+            <i id="voltar_semana" onclick="mudarTempo(this)"class="fa-solid fa-angle-left modificadores_tempo "></i> <span>Vendas no dia: <yellow>20/07/2023</yellow> <i class="gerar_pdf fa-regular fa-file-pdf"></i></span><i id="adiantar_semana"onclick="mudarTempo(this)" class="fa-solid fa-angle-right modificadores_tempo adiantar_semana"></i>
             </div>
             <table id="table_tabela">
                 <thead>

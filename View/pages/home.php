@@ -16,11 +16,11 @@
 <input type="hidden" id="include_path" value="<?php echo BASE_DIR_PAINEL.'\\'?>" disabled>
 <aside id="sidebar">
   <span class="princip_span"> Caixa Selecionado</span>
-  <input value="<?php 
+  <input class="princip_span" value="<?php 
   if(isset($_COOKIE['caixa'])){
     echo $_COOKIE['caixa'];
   }
-  ?>" type="text" id="caixa_selecionado" style="height: 30px; text-align:center;"><button id="salvar_caixa">Salvar</button>
+  ?>" type="text" id="caixa_selecionado" style="height: 30px; text-align:center; border:none; cursor:text;"><button class="princip_span" id="salvar_caixa">Salvar</button>
   <span class="princip_span" onclick="abrirModal('modal_anotar_pedido')">Anotar Pedido</span>
 
   <span class="princip_span"id="abrir_lista_pedidos">Pedidos</span>
@@ -389,19 +389,5 @@ $data_formatada = date('d/m/Y', $timestamp);
 
 
 </body>
-<div style="text-align:center">
-    <h1>Print ESP/POS commands from Javascript</h1>
-    <hr />
-    <label class="checkbox">
-        <input type="checkbox" id="useDefaultPrinter" /> <strong>Print to Default printer</strong>
-    </label>
-    <p>or...</p>
-    <div id="installedPrinters">
-        <label for="installedPrinterName">Select an installed Printer:</label>
-        <select name="installedPrinterName" id="installedPrinterName"></select>
-    </div>
-    <br /><br />
-    <button type="button" onclick="print();">Print Now...</button>
-</div>
 
 </html>
