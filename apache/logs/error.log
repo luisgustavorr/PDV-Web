@@ -1797,3 +1797,5 @@ pm_winnt:notice] [pid 22992:tid 348] AH00364: Child: All worker threads have exi
 Apache server shutdown initiated...
 pm_winnt:notice] [pid 16956:tid 336] AH00354: Child: Starting 150 worker threads.
 [Fri Jul 28 09:41:59.056495 2023] [mpm_winnt:notice] [pid 21200:tid 340] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Jul 28 09:42:33.694199 2023] [mpm_winnt:notice] [pid 16956:tid 336] AH00362: Child: Waiting 270 more seconds for 1 worker threads to finish.
+[Fri Jul 28 09:42:36.403987 2023] [mpm_winnt:notice] [pid 16956:tid 336] AH00364: Child: All worker threads have exited.
