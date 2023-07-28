@@ -14590,3 +14590,6 @@
 [28/Jul/2023:08:42:22 -0300] 127.0.0.1 TLSv1.3 TLS_AES_256_GCM_SHA384 "GET /MixSalgados/Caixa/ HTTP/1.1" 16284
 [28/Jul/2023:08:42:23 -0300] 127.0.0.1 TLSv1.3 TLS_AES_256_GCM_SHA384 "POST /MixSalgados/Caixa/Models/post_receivers/select_valor_caixa.php HTTP/1.1" 1
 [28/Jul/2023:08:42:23 -0300] 127.0.0.1 TLSv1.3 TLS_AES_256_GCM_SHA384 "POST /MixSalgados/Caixa/Models/post_receivers/select_pedidos.php HTTP/1.1" 4
+[28/Jul/2023:08:43:43 -0300] 127.0.0.1 TLSv1.3 TLS_AES_256_GCM_SHA384 "GET /MixSalgados/Caixa/ HTTP/1.1" 16284
+[28/Jul/2023:08:43:44 -0300] 127.0.0.1 TLSv1.3 TLS_AES_256_GCM_SHA384 "POST /MixSalgados/Caixa/Models/post_receivers/select_valor_caixa.php HTTP/1.1" 1
+[28/Jul/2023:08:43:44 -0300] 127.0.0.1 TLSv1.3 TLS_AES_256_GCM_SHA384 "POST /MixSalgados/Caixa/Models/post_receivers/select_pedidos.php HTTP/1.1" 4
