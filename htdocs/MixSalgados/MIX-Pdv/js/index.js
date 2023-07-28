@@ -85,9 +85,10 @@ $("#desc_produto").on("keyup", function () {
     data = {
       pesquisa: $(this).val(),
     };
-    $(".search_results").children().remove();
+    
     $.post("Models/post_receivers/select_pesquisa.php", data, function (ret) {
       row = JSON.parse(ret);
+     
       row.forEach((element) => {
         $(".search_results").append(
           '<span produto="' +
@@ -125,10 +126,11 @@ $("#codigo_produto").on("keyup", function () {
       pesquisa: $(this).val(),
       codigo: true,
     };
-    $(".search_results_by_barcode").children().remove();
     $.post("Models/post_receivers/select_pesquisa.php", data, function (ret) {
-      row = JSON.parse(ret);
+      row = JSON.parse(ret)
       row.forEach((element) => {
+        $(".search_results_by_barcode").empty();
+
         $(".search_results_by_barcode").append(
           '<span produto="' +
             element.codigo +
@@ -235,6 +237,7 @@ function pesquisarProdutoPorCodigoDeBarras(ret) {
   });
 
   darker = !darker;
+  $("#codigo_produto").val('')
   $(".search_results").css("display", "none");
   $(".search_results_by_barcode").css("display", "none");
 }
@@ -243,9 +246,11 @@ $(".menu").click(function () {
   if (side_bar_aberta) {
     $("#sidebar").animate({ width: "0" });
     $("#sidebar span").css("display", "none");
+    $("#salvar_caixa").css("display", "none");
   } else {
     $("#sidebar").animate({ width: "300px" },200, function () {
       $("#sidebar .princip_span").css("display", "block");
+      $("#salvar_caixa").css("display", "flex");
     });
   }
   side_bar_aberta = !side_bar_aberta;
@@ -431,7 +436,7 @@ $("#finalizar_venda_modal_button").click(function () {
   }
 });
 $(document).keyup(function (event) {
-  if (event.code.includes("Digit") && condicao_favoravel && window.location.href == 'https://localhost/MixSalgados/Caixa/') {
+  if (event.code.includes("Digit") && condicao_favoravel && window.location.href.includes('http://localhost/MixSalgados/Caixa/' )) {
     var key = event.keyCode || event.which;
     key = String.fromCharCode(key);
     console.log(event.code);

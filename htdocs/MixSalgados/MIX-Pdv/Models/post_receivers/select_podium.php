@@ -24,14 +24,17 @@ include('../../MySql.php');
             $row = \MySql::conectar()->prepare("SELECT p.nome, p.preco, vendas_contadas.ordem, vendas_contadas.total_vendas
             FROM tb_produtos p
             INNER JOIN (
-                SELECT produto, COUNT(*) as total_vendas,
-                       ROW_NUMBER() OVER (ORDER BY COUNT(*) DESC) AS ordem
-                FROM tb_vendas
-                WHERE date(data) BETWEEN ? AND ? ".$caixa."
-                GROUP BY produto
-            ) vendas_contadas
-            ON p.id = vendas_contadas.produto
-            ORDER BY total_vendas DESC;");
+                SELECT produto, total_vendas,
+                       @row_number := @row_number + 1 AS ordem
+                FROM (
+                    SELECT produto, COUNT(*) as total_vendas
+                    FROM tb_vendas
+                    WHERE date(data) BETWEEN ? AND ? ".$caixa."
+                    GROUP BY produto
+                    ORDER BY COUNT(*) DESC
+                ) vendas_contadas, (SELECT @row_number := 0) AS rn_init
+            ) vendas_contadas ON p.id = vendas_contadas.produto
+            ORDER BY vendas_contadas.total_vendas DESC");
             $row->execute(array($_POST['data_min'],$_POST['data_max']));
             $row = $row->fetchAll();
             $ordem = 1;
